@@ -2,11 +2,30 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--NameSpace map a Mapper interface-->
-<mapper namespace="Dao.UserDao">
+<!--NameSpace map a Dao/Mapper interface-->
+<mapper namespace="Dao.UserMapper">
 
     <select id="getUserList" resultType="impl.User">
         select * from user;
     </select>
+
+    <select id="getUserByID" resultType="impl.User" parameterType="int">
+        select * from user where id=#{id} ;
+    </select>
+
+    <!--elements inside obj can be directly used-->
+    <insert id="insertUser" parameterType="impl.User">
+        insert into user (id, name, pwd) value (
+            #{id},#{name},#{pwd};
+        )
+    </insert>
+
+    <update id="updateUser" parameterType="impl.User">
+        update user set name=#{name}, pwd=#{pwd} where id=#{id};
+    </update>
+
+    <delete id="deleteUserByID" parameterType="int">
+        delete from user where id=#{id};
+    </delete>
 
 </mapper>
